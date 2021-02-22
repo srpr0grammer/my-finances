@@ -20,7 +20,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     private LancamentoRepository lancamentoRepository;
 
     public LancamentoServiceImpl (LancamentoRepository lancamentoRepository){
-        this.lancamentoRepository = lancamentoRepository;
+        this.lancamentoRepository = lancamentoRepository ;
     }
 
     @Override
