@@ -17,7 +17,7 @@ import java.util.Objects;
 public class LancamentoServiceImpl implements LancamentoService {
 
     @Autowired
-    private LancamentoRepository lancamentoRepository;
+    private LancamentoRepository lancamentoRepository ;
 
     public LancamentoServiceImpl (LancamentoRepository lancamentoRepository){
         this.lancamentoRepository = lancamentoRepository ;
