@@ -7,12 +7,16 @@ import com.as.myfinances.model.entity.Usuario;
 import com.as.myfinances.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -22,12 +26,14 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity save(@RequestBody UsuarioDTO usuarioDTO){
+    public ResponseEntity save(@Valid @RequestBody UsuarioDTO usuarioDTO){
         Usuario usuario = fromDTO(usuarioDTO);
+
 
         try {
             Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
         return  new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
+
         }
 
         catch (RegraNegocioException e) {
@@ -37,9 +43,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/autenticar")
-    public ResponseEntity autenticar(@RequestBody UsuarioDTO usuarioDTO){
+    public ResponseEntity autenticar(@RequestBody UsuarioDTO usuarioDTO) {
 
-        try{
+        try {
         Usuario usuarioAutenticado = usuarioService.autenticar(usuarioDTO.getEmail(), usuarioDTO.getSenha());
 
         return ResponseEntity.ok(usuarioAutenticado);
@@ -50,7 +56,7 @@ public class UsuarioController {
     }
 
     //Conversao Entidade para DTO
-    public Usuario fromDTO (UsuarioDTO dto){
+    private Usuario fromDTO (UsuarioDTO dto){
         Usuario usuario = Usuario.builder()
                 .nome(dto.getNome())
                 .email(dto.getEmail())

@@ -1,5 +1,6 @@
 package com.as.myfinances.service.impl;
 
+
 import com.as.myfinances.model.entity.Lancamento;
 import com.as.myfinances.model.enums.StatusLancamento;
 import com.as.myfinances.repository.LancamentoRepository;
@@ -10,8 +11,10 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class LancamentoServiceImpl implements LancamentoService {
@@ -62,4 +65,10 @@ public class LancamentoServiceImpl implements LancamentoService {
         lancamento.setStatus(status);
         atualizar(lancamento);
     }
+
+    @Override
+    public Optional<Lancamento> buscarPorId(Long id) {
+        return lancamentoRepository.findById(id);
+    }
+
 }
