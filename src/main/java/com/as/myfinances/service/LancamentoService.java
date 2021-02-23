@@ -3,6 +3,7 @@ package com.as.myfinances.service;
 import com.as.myfinances.model.entity.Lancamento;
 import com.as.myfinances.model.enums.StatusLancamento;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +20,8 @@ public interface LancamentoService {
     void atualizarStatus (Lancamento lancamentoFiltro, StatusLancamento status);
 
     Optional<Lancamento> buscarPorId (Long id);
+
+
+    BigDecimal obterSaldoPorUsuario(Long id);
+
 }

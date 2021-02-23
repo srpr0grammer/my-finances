@@ -1,8 +1,7 @@
 package com.as.myfinances.model.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.as.myfinances.model.entity.Usuario;
+import lombok.*;
 
 
 import javax.validation.constraints.Email;
@@ -13,7 +12,11 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioDTO {
+
+    private Long id;
 
     @Email(message = "Email incorreto!")
     private String email;
@@ -23,4 +26,12 @@ public class UsuarioDTO {
 
     @NotBlank(message = "Campo obrigatório.")
     private String senha;
+
+    public UsuarioDTO(Usuario obj) {
+        id = obj.getId();
+        email = obj.getEmail();
+        nome = obj.getNome();
+        senha = obj.getSenha();
+
+    }
 }
