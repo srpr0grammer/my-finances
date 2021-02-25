@@ -31,6 +31,7 @@ public class LancamentoServiceImpl implements LancamentoService {
     @Override
     @Transactional
     public Lancamento salvar(Lancamento lancamento) {
+
         lancamento.setStatus(StatusLancamento.PENDENTE);
         return lancamentoRepository.save(lancamento);
     }

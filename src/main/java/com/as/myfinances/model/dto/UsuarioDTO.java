@@ -19,6 +19,7 @@ public class UsuarioDTO {
     private Long id;
 
     @Email(message = "Email incorreto!")
+    @NotBlank(message = "Email obrigatório.")
     private String email;
 
     @NotBlank(message = "Campo obrigatório")
