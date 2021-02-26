@@ -1,4 +1,4 @@
-package com.as.myfinances.exception;
+package com.as.myfinances.controller.exception;
 
 public class ErrorAutenticationException extends RuntimeException{
 

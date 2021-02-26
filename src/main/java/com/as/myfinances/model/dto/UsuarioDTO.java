@@ -2,11 +2,13 @@ package com.as.myfinances.model.dto;
 
 import com.as.myfinances.model.entity.Usuario;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 
 import javax.validation.constraints.Email;
 
-import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.NotEmpty;
 
 
 @Getter
@@ -19,13 +21,15 @@ public class UsuarioDTO {
     private Long id;
 
     @Email(message = "Email incorreto!")
-    @NotBlank(message = "Email obrigatório.")
+    @NotEmpty(message = "Email obrigatório.")
     private String email;
 
-    @NotBlank(message = "Campo obrigatório")
+    @NotEmpty(message = "Nome obrigatória.")
+    @Length(min = 3, max = 120, message = "O tamanho deve ser entre 3 e 120 caracteres.")
     private String nome;
 
-    @NotBlank(message = "Campo obrigatório.")
+    @NotEmpty(message = "Senha obrigatória.")
+    @Length(min = 6, max = 20, message = "O tamanho deve ser entre 6 e 20 caracteres.")
     private String senha;
 
     public UsuarioDTO(Usuario obj) {

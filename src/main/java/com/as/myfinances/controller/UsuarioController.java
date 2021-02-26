@@ -1,18 +1,15 @@
 package com.as.myfinances.controller;
 
-import com.as.myfinances.exception.ErrorAutenticationException;
-import com.as.myfinances.exception.RegraNegocioException;
+import com.as.myfinances.controller.exception.ErrorAutenticationException;
+import com.as.myfinances.controller.exception.RegraNegocioException;
 import com.as.myfinances.model.dto.UsuarioDTO;
-import com.as.myfinances.model.entity.Lancamento;
 import com.as.myfinances.model.entity.Usuario;
 import com.as.myfinances.service.LancamentoService;
 import com.as.myfinances.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

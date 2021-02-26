@@ -1,7 +1,7 @@
 package com.as.myfinances.service;
 
-import com.as.myfinances.exception.ErrorAutenticationException;
-import com.as.myfinances.exception.RegraNegocioException;
+import com.as.myfinances.controller.exception.ErrorAutenticationException;
+import com.as.myfinances.controller.exception.RegraNegocioException;
 import com.as.myfinances.model.entity.Usuario;
 import com.as.myfinances.repository.UsuarioRepository;
 import com.as.myfinances.service.impl.UsuarioServiceImpl;

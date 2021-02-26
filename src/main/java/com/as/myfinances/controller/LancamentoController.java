@@ -1,6 +1,6 @@
 package com.as.myfinances.controller;
 
-import com.as.myfinances.exception.RegraNegocioException;
+import com.as.myfinances.controller.exception.RegraNegocioException;
 import com.as.myfinances.model.dto.LancamentoDTO;
 import com.as.myfinances.model.dto.StatusLancamentoDTO;
 import com.as.myfinances.model.entity.Lancamento;
@@ -10,12 +10,12 @@ import com.as.myfinances.model.enums.TipoLancamento;
 import com.as.myfinances.service.LancamentoService;
 import com.as.myfinances.service.UsuarioService;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +31,12 @@ public class LancamentoController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity salvar( @RequestBody LancamentoDTO lancamentoDTO){
+    public ResponseEntity salvar(@Valid @RequestBody LancamentoDTO lancamentoDTO){
 
         try {
         Lancamento lancamento = fromDTO(lancamentoDTO);
         lancamento = lancamentoService.salvar(lancamento);
-        return ResponseEntity.status(HttpStatus.CREATED).body(lancamento);
+        return new ResponseEntity(lancamento, HttpStatus.CREATED);
 
         }
         catch (RegraNegocioException e){
