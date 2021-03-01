@@ -16,5 +16,5 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
                    "WHERE u.id = :idUsuario " +
                    "AND l.tipo =:tipo GROUP BY u")
     BigDecimal obterSaldoPorTipoLancamentoEUsuario(@Param("idUsuario") Long id,
-                                                   @Param("tipo") TipoLancamento tipo);
+                                                   @Param("tipo") TipoLancamento tipo) ;
 }
