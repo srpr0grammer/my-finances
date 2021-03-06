@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./../Components/card";
 import FormGroup from "./../Components/form-group";
+import { withRouter } from 'react-router-dom';
 
 class CadastroUsuario extends React.Component {
   
@@ -18,6 +19,11 @@ class CadastroUsuario extends React.Component {
         console.log('Email: ', this.state.email);
         console.log('Senha: ', this.state.senha);
         console.log('Digite sua senha novamente: ', this.state.senhaRepeticao);
+    }
+
+    //funcao para acessar a tela de login ao clicar em cancelar
+    telaCancelar = () => {
+      this.props.history.push('/login')
     }
 
   render() {
@@ -69,7 +75,7 @@ class CadastroUsuario extends React.Component {
               </FormGroup>
 
               <button onClick={this.cadastrar} type="button" className="btn btn-success">Salvar</button>
-              <button type="button" class="btn btn-danger">Voltar</button>
+              <button onClick={this.telaCancelar} type="button" class="btn btn-danger">Voltar</button>
 
             </div>
           </div>
@@ -79,4 +85,4 @@ class CadastroUsuario extends React.Component {
   }
 }
 
-export default CadastroUsuario;
+export default withRouter( CadastroUsuario );

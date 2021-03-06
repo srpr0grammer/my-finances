@@ -1,15 +1,40 @@
 import React from "react";
+import NavBarItem from "./navbarItem";
 
-class NavBar extends React.Component {
+function NavBar() {
+  return (
+    <div>
+      <div
+        className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary"
+      >
+        <div className="container">
+          <a href="https://bootswatch.com/" className="navbar-brand">
+            Minhas Finanças
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
-
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav">
+                <NavBarItem label="Home" href="#/home"/>
+                <NavBarItem label="Usuario" href="#/cadastro-usuarios"/>
+                <NavBarItem label="Lancamentos" href="#/cadastro-#/"/>
+                <NavBarItem label="Login" href="#/login"/>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default NavBar
+export default NavBar;
