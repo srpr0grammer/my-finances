@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './../Components/card';
 import FormGroup from './../Components/form-group';
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 class Login extends React.Component {
     
@@ -12,8 +13,19 @@ class Login extends React.Component {
     
     //funcao para logar
     entrar = () => {
-        console.log('Email: ', this.state.email);
-        console.log('Senha: ', this.state.senha);
+        // realizando a requisicao no back-end
+        axios
+        .post("http://localhost:8080/api/usuarios/autenticar", {
+            email: this.state.email,
+            senha: this.state.senha
+        }).then( response=> {
+            console.log(response);
+        }).catch( error => {
+            console.log(error.response);
+        })
+        
+      //  console.log('Email: ', this.state.email);
+      //  console.log('Senha: ', this.state.senha);
     }
 
     //funcao para acesssar a tela CADASTRO DE USUARIO quando clicar em CADASTRAR
