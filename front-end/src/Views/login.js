@@ -8,20 +8,21 @@ class Login extends React.Component {
     
     state = {
         email : '',
-        senha: ''
+        senha: '',
+        mensagemErro: null
     }
     
     //funcao para logar
-    entrar = () => {
+    entrar = async () => {
         // realizando a requisicao no back-end
         axios
         .post("http://localhost:8080/api/usuarios/autenticar", {
             email: this.state.email,
             senha: this.state.senha
         }).then( response=> {
-            console.log(response);
+            this.props.history.push('/home')
         }).catch( error => {
-            console.log(error.response);
+            this.setState({mensagemErro: error.response.data})
         })
         
       //  console.log('Email: ', this.state.email);
@@ -41,6 +42,9 @@ class Login extends React.Component {
                 <div className="col-md-6" style={ { position: 'relative', left: '300px' } }>
                     <div className="bs-docs-section">
                         <Card title="Login">
+                            <div className="row">
+                                <span>{this.state.mensagemErro}</span>
+                            </div>
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="bs-component">

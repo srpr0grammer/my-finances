@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./../Components/card";
 import FormGroup from "./../Components/form-group";
 import { withRouter } from 'react-router-dom';
+import axios from "axios";
 
 class CadastroUsuario extends React.Component {
   
@@ -10,15 +11,28 @@ class CadastroUsuario extends React.Component {
         nome: '',
         email: '',
         senha: '',
-        senhaRepeticao: ''
+        senhaRepeticao: '',
+        mensagemErro: null
     }
 
     //fuincao para cadastrar usuario
     cadastrar = () => {
-        console.log('Nome: ', this.state.nome);
+        axios
+          .post('http://localhost:8080/api/usuarios', {
+            nome: this.state.nome,
+            email: this.state.email,
+            senha: this.state.senha,
+            senhaRepeticao: this.state.senhaRepeticao
+          }).then(response => {
+            console.log(response);
+          }).catch(error => {
+            this.setState({mensagemErro: error.response.data})
+          })
+        
+        /* console.log('Nome: ', this.state.nome);
         console.log('Email: ', this.state.email);
         console.log('Senha: ', this.state.senha);
-        console.log('Digite sua senha novamente: ', this.state.senhaRepeticao);
+        console.log('Digite sua senha novamente: ', this.state.senhaRepeticao); */
     }
 
     //funcao para acessar a tela de login ao clicar em cancelar
@@ -31,6 +45,9 @@ class CadastroUsuario extends React.Component {
       <div className="container">
         <Card title="Cadastro de Usuario">
           <div className="row">
+            <span>{this.state.mensagemError}</span>
+          </div>
+          <div className="row">
             <div className="col-lg-12">
               <div className="bs-component"></div>
 
@@ -41,7 +58,7 @@ class CadastroUsuario extends React.Component {
                         name="nome" 
                         placeholder="Digite o Nome"
                         onChange={e => this.setState({nome: e.target.value})}
-                        va={this.state.nome}/>
+                        value={this.state.nome}/>
               </FormGroup>
              
               <FormGroup label="Email: *" htmlFor="inputEmail">
