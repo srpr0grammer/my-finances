@@ -1,9 +1,22 @@
+import axios from "axios";
 import React from "react";
 
 class Home extends React.Component {
 
   state = {
-    slado: 0
+    saldo: 0
+  }
+
+  componentDidMount(){
+    const usuarioLogadoString = localStorage.getItem('_usuario_logado')
+    const usuarioObj = JSON.parse(usuarioLogadoString)
+    axios
+      .get(`http://localhost:8080//api/usuarios/${usuarioObj.id}/saldo`)
+        .then( response => {
+          this.setState({saldo: response.data})
+        }).catch( error => {
+           console.error(error.response) 
+        })
   }
 
     render(){
@@ -12,7 +25,7 @@ class Home extends React.Component {
             <div className="jumbotron">
               <h1 className="display-3">Bem vindo!</h1>
               <p className="lead">Esse é seu sistema de finanças.</p>
-              <p className="lead">Seu saldo para o mês atual é de R$ {this.state.slado} </p>
+              <p className="lead">Seu saldo para o mês atual é de R$ {this.state.saldo} </p>
               <hr className="my-4" />
               <p>
                 E essa é sua área administrativa, utilize um dos menus ou botões
