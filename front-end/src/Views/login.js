@@ -3,6 +3,7 @@ import Card from './../Components/card';
 import FormGroup from './../Components/form-group';
 import { withRouter } from 'react-router-dom'
 import UsuarioService from './../app/service/usuarioService';
+import LocalStorageService from './../app/service/localStorageService';
 
 class Login extends React.Component {
     
@@ -18,14 +19,18 @@ class Login extends React.Component {
     }
     
     //funcao para logar
-    entrar = async () => {
+    entrar = () => {
         // realizando a requisicao no back-end
         this.service.autenticar( {
             email: this.state.email,
             senha: this.state.senha
         }).then( response=> {
             //adicionando e recuperando o usuario logado na sessao.(LOCAL STORAGE)
-            localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+            LocalStorageService.adicionarItem('_usuario_logado', response.data)
+            
+            //Sem ser refatorado
+            //localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+
             this.props.history.push('/home')
         }).catch( error => {
             this.setState({mensagemErro: error.response.data})

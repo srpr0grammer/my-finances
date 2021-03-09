@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./../Components/card";
 import FormGroup from "./../Components/form-group";
 import { withRouter } from 'react-router-dom';
-import axios from "axios";
+import UsuarioService from './../app/service/usuarioService';
 
 class CadastroUsuario extends React.Component {
   
@@ -15,15 +15,20 @@ class CadastroUsuario extends React.Component {
         mensagemErro: null
     }
 
+    constructor(){
+      super()
+      this.service = new UsuarioService();
+    }
+
     //fuincao para cadastrar usuario
     cadastrar = () => {
-        axios
-          .post('http://localhost:8080/api/usuarios', {
-            nome: this.state.nome,
-            email: this.state.email,
-            senha: this.state.senha,
-            senhaRepeticao: this.state.senhaRepeticao
-          }).then(response => {
+         // realizando a requisicao no back-end
+        this.service.cadastrar({
+          nome: this.state.nome,
+          email: this.state.email,
+          senha: this.state.senha,
+          senhaRepeticao: this.state.senhaRepeticao
+        }).then(response => {
             console.log(response);
           }).catch(error => {
             this.setState({mensagemErro: error.response.data})
