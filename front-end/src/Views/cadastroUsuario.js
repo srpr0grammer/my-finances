@@ -65,7 +65,7 @@ class CadastroUsuario extends React.Component {
         senhaRepeticao: this.state.senhaRepeticao,
       })
       .then((response) => {
-        mensagemSucesso('Uusario cadastrado com sucesso! Faça o login para acessar o sistema.')
+        mensagemSucesso('Usario cadastrado com sucesso! Faça o login para acessar o sistema.')
         this.props.history.push('/login')
       })
       .catch((error) => {
@@ -88,7 +88,6 @@ class CadastroUsuario extends React.Component {
       <div className="container">
         <Card title="Cadastro de Usuario">
           <div className="row">
-            <span>{this.state.mensagemError}</span>
           </div>
           <div className="row">
             <div className="col-lg-12">
